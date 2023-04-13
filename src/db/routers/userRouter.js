@@ -118,7 +118,7 @@ router.post('/user/create', async (req,res) => {
 });
 
 /**
- * Checks if user login credentials ( email,password ) are correct and returns a token.
+ * Checks if user login credentials ( email,password ) are correct and returns a token. aaa
  */
 router.post('/user/login', async (req,res)=>{
     const loginInfo = req.body;
