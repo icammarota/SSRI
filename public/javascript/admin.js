@@ -150,6 +150,26 @@ addBookRequest.addEventListener('submit', (e)=>{
 });
 
 /**
+ * Sends a search request to the server.
+ * @param {Book name} book 
+ */
+async function SearchBook(book)
+{
+    const res = await fetch('/books/search/'+ book ,{
+        method: 'GET'
+    });
+    const data = await res.json();
+    bookResults.innerHTML = '';
+    if (data&&data.length>0) {
+        for (let index = 0; index < data.length; index++) {            
+            BookResults(data[index]);
+        }
+    }
+
+}
+
+
+/**
  * Adds a book to the data base ( Server Request ).
  */
 async function AddBook(book)
@@ -164,7 +184,7 @@ async function AddBook(book)
         alert(data.Message);
         return;
     }
-    SearchBook('n' + book.name);
+    SearchBook(book.name);
     alert('Book has been added to the DB. Check results in order to view the book.');
 }
 
