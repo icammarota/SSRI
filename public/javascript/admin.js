@@ -168,6 +168,25 @@ async function SearchBook(book)
 
 }
 
+/**
+ * Sends a search request to the server.
+ * @param {Author name} author 
+ */
+async function SearchAuthor(author)
+{
+    const res = await fetch('/books/search-author/'+ author ,{
+        method: 'GET'
+    });
+    const data = await res.json();
+    bookResults.innerHTML = '';
+    if (data&&data.length>0) {
+        for (let index = 0; index < data.length; index++) {            
+            BookResults(data[index]);
+        }
+    }
+
+}
+
 
 /**
  * Adds a book to the data base ( Server Request ).
@@ -341,6 +360,7 @@ async function SearchBookAuthor(searchValue)
     }
     else
     {
+        bookResults.innerHTML = '';
         for(let i = 0; i < data.length; i++ )
             BookResults(data[i]);
     } 

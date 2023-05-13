@@ -152,7 +152,7 @@ router.post('/user/cart/add/:id',userAuth, async(req,res)=>{
             return res.status(400).send({Message: 'User not logged in.'});
         await user.populate( 'cart.book' );
         for(let i = 0; i < user.cart.length; i++ )
-            if( book.name === user.cart[0].book.name )
+            if( book.name === user.cart[i].book.name )
                 return res.status(400).send( {Message: 'Book has been already added to the cart previously.'} );
         user.cart.push( {book} );
         await user.save();

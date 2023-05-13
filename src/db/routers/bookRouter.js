@@ -52,13 +52,14 @@ router.get('/books/name/:id',async (req,res)=>{
  * Searches a book by author name and sends it to the client.
  */
 router.get('/books/author/:id', async (req,res)=>{
-    const bookSearch = req.params.id;
+    const bookSearch = '.*'+req.params.id+'.*';
     try{
         if( bookSearch.length < 2)
-            return res.status(400).send( {Message: 'Book name is too short.'} );
-        const book = await Book.find( { author: bookSearch } );
+            return res.status(400).send( {Message: 'Author name is too short.'} );
+        /*const book = await Book.find( { author: bookSearch } );*/
+        const book = await Book.find( { "author": { $regex: bookSearch, $options: 'i' } } );
         if( !book || book.length === 0 )
-            return res.status(400).send( {Message:'Book not found.'} );
+            return res.status(400).send( {Message:'Author not found.'} );
         res.send(book);
     }
     catch(e){
@@ -82,6 +83,31 @@ router.get('/books/author/:id', async (req,res)=>{
         const result = [];
         for(let i = 0; i < books.length; i++){
             if( SearchFilter(searchValue.toLowerCase(),books[i].name.toLowerCase()) )
+                result.push(books[i]);
+        }
+        if( !result)
+            return res.status(400).send({Message: 'Invalid Search. There are no books by search value:' + searchValue});
+        res.send(result);
+    }
+    catch(e){
+        res.status(500).send(e);
+    }
+});
+
+
+router.get('/books/search-author/:id', async(req,res)=>{
+    try{
+        const searchValue = req.params.id;
+        const books = await Book.find();
+        if( searchValue === '*' ){
+            let result = [];
+            for(let i = 0; i < limit && i < books.length; i++)
+                result[i] = books[i];
+            return res.send(result);
+        }
+        const result = [];
+        for(let i = 0; i < books.length; i++){
+            if( SearchFilter(searchValue.toLowerCase(),books[i].author.toLowerCase()) )
                 result.push(books[i]);
         }
         if( !result)

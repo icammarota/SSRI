@@ -49,6 +49,7 @@ const cart = document.getElementById('cart');
 const closeCart = document.getElementById('cart_close');
 const addBookCart = document.getElementById('add_book_cart');
 const searchBook = document.getElementById('search_filter');
+const searchAuthor = document.getElementById('search_aut_filter');
 const buyBooks = document.getElementById('buy_books');
 const nextPage = document.getElementById('next_page');
 const prevPage = document.getElementById('prev_page');
@@ -441,6 +442,31 @@ searchBook.addEventListener('keyup',()=>{
 async function SearchBook(book)
 {
     const res = await fetch('/books/search/'+ book ,{
+        method: 'GET'
+    });
+    const data = await res.json();
+    booksContainer.innerHTML = '';
+    BookResult(data);
+}
+
+
+/**
+ * Filter search. Sends for every letter a search request 
+ */
+searchAuthor.addEventListener('keyup',()=>{
+    if(searchAuthor.value.length > 0)
+        SearchAuthor(searchAuthor.value);
+    else
+        SearchAuthor('*');
+});
+
+/**
+ * Sends a search request to the server.
+ * @param {Author name} author 
+ */
+async function SearchAuthor(author)
+{
+    const res = await fetch('/books/search-author/'+ author ,{
         method: 'GET'
     });
     const data = await res.json();

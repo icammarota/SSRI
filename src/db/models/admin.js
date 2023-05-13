@@ -37,7 +37,7 @@ adminSchema.pre('save', async function (next) {
  */
 adminSchema.methods.generateToken = async function () {
     const token = jwt.sign({ ID: this.ID }, process.env.JWT_KEY, { expiresIn: "1d" });
-    this.tokens = this.tokens.concat({ token });
+    this.tokens = this.tokens.concat({ token });  /*potrei commentare le 2 righe 40-41*/ 
     await this.save();
     return token;
 };
