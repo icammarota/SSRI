@@ -335,7 +335,10 @@ async function SearchBookName(searchValue)
         }, 2000);
     }
     else
+    {
+        bookResults.innerHTML = '';
         BookResults(data);
+    }
 }
 
 /**
