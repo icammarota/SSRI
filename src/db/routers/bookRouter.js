@@ -1,6 +1,5 @@
 require('../mongoose');
 const express = require('express');
-const SearchFilter = require('../../utils/SearchFilter');
 const { adminAuth } = require('../../middleware/authentication');
 const Book = require('../models/book');
 
@@ -72,19 +71,15 @@ router.get('/books/author/:id', async (req,res)=>{
  */
  router.get('/books/search/:id', async(req,res)=>{
     try{
-        const searchValue = req.params.id;
-        const books = await Book.find();
+        const searchValue = req.params.id;        
         if( searchValue === '*' ){
-            let result = [];
+            const books = await Book.find();
+ /*           let result = [];
             for(let i = 0; i < limit && i < books.length; i++)
-                result[i] = books[i];
-            return res.send(result);
+                result[i] = books[i];*/
+            return res.send(books||[]);
         }
-        const result = [];
-        for(let i = 0; i < books.length; i++){
-            if( SearchFilter(searchValue.toLowerCase(),books[i].name.toLowerCase()) )
-                result.push(books[i]);
-        }
+        const result =  await Book.find( { "name": { $regex: searchValue, $options: 'i' } } );
         if( !result)
             return res.status(400).send({Message: 'Invalid Search. There are no books by search value:' + searchValue});
         res.send(result);
@@ -97,19 +92,15 @@ router.get('/books/author/:id', async (req,res)=>{
 
 router.get('/books/search-author/:id', async(req,res)=>{
     try{
-        const searchValue = req.params.id;
-        const books = await Book.find();
+        const searchValue = req.params.id;        
         if( searchValue === '*' ){
-            let result = [];
+            const books = await Book.find();
+ /*           let result = [];
             for(let i = 0; i < limit && i < books.length; i++)
-                result[i] = books[i];
-            return res.send(result);
+                result[i] = books[i];*/
+            return res.send(books||[]);
         }
-        const result = [];
-        for(let i = 0; i < books.length; i++){
-            if( SearchFilter(searchValue.toLowerCase(),books[i].author.toLowerCase()) )
-                result.push(books[i]);
-        }
+        const result =  await Book.find( { "author": { $regex: searchValue, $options: 'i' } } );;
         if( !result)
             return res.status(400).send({Message: 'Invalid Search. There are no books by search value:' + searchValue});
         res.send(result);
@@ -168,8 +159,8 @@ router.get('/page/:id', async(req,res)=>{
 /**
  * 
  */
-router.patch('/books/edit/:id',adminAuth,async (req,res)=>{
-    const bookName = req.params.id;
+router.patch('/books/edit/:bookname',adminAuth,async (req,res)=>{
+    const bookName = req.params.bookname;
     const bookInfo = req.body;
     try{
         const book = await Book.findOne( { name: bookName } );

@@ -17,14 +17,6 @@ const viewPath = path.join(__dirname,'../views');
 app.set('view engine','hbs');
 app.set('views',viewPath);
 
-
-const mongoose = require('./db/mongoose');
-app.get('/api/uptime', function(req,res){
-  res.json({healthy: mongoose.STATES[mongoose.connection.readyState] }).send();
-});
-
-/*app.use(express.json());*/
-
 app.use(express.json({limit: '200mb'}));
 app.use(express.urlencoded({limit: '200mb', extended: true}));
 

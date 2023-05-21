@@ -3,7 +3,6 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const { adminAuth } = require('../../middleware/authentication');
 const Admin = require('../models/admin');
-const Book = require('../models/book');
 
 const router = express.Router();
 
@@ -54,14 +53,6 @@ router.get('/admin/page', async (req, res) => {
  router.get('/admin/logout', async(req,res)=>{
     const {token} = req.headers;
     try{
-        const admin = await Admin.findOne({token});
-        for(let i = 0; i < admin.tokens.length; i++){
-            if( token === admin.tokens[i].token ){
-                admin.tokens[i].token += 'Im gonna ruin this token';
-                break;
-            }
-        }
-        await admin.save();
         res.send();
     } 
     catch(e){

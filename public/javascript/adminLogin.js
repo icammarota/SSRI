@@ -12,7 +12,6 @@ login.addEventListener('submit', (e) => {
 
 /**
  * Sends an admin login request to the server in order to validate.
- * @param {Admin Credentials} loginInfo 
  */
  async function loginAdmin(loginInfo) {
     const res = await fetch('/admin/login', {

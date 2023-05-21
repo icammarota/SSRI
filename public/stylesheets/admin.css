@@ -285,6 +285,36 @@ button:hover{
     margin-right: 2%; margin-left: 2%;
 }
 
+#get_author_edit_form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    font-size: 16px;
+    height: 25px;
+}
+
+#get_author_edit_form>input{
+    width: 75%;
+    height: 100%;
+    font-size: 16px;
+    font-weight: 600;
+    height: 25px;
+    margin-left: 2%;
+}
+
+#get_author_edit_form>input::placeholder{
+    font-weight: 600;
+    font-size: 16px;
+}
+
+#get_author_edit_form>button{
+    height: 100%;
+    width: 25%;
+    margin:0; padding:0;
+    margin-right: 2%; margin-left: 2%;
+}
+
 #edit_book_modal{
     box-shadow: 0 0 15px 0 black;
 }
@@ -321,6 +351,34 @@ button:hover{
     margin-top: 10px;
 }
 
+#edit_book_form_by_author{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+}
+#edit_book_form_by_author>div{
+    display: flex;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+#edit_book_form_by_author>div>input{
+    width: 25%;
+    font-weight: 600;
+    margin-right: 1%;
+    margin-bottom: 10px;
+}
+#edit_book_form_by_author>textarea{
+    min-height: 50px;
+    margin-left: 2%;
+    margin-right: 2%;
+    font-weight: 600;
+}
+
+#edit_book_form_by_author>button{
+    margin: auto;
+    margin-top: 10px;
+}
+
 #background_wall{
     position: absolute;
     width: 100%;
@@ -350,6 +408,9 @@ button:hover{
         left:10%;
     }
     #get_book_edit_form>button{
+        height: 30px;
+    }
+    #get_author_edit_form>button{
         height: 30px;
     }
     button{

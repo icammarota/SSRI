@@ -6,6 +6,7 @@ const getBookByName = document.getElementById('get_book_name');
 const getBookByAuthor = document.getElementById('get_book_author');
 const getAllBooks = document.getElementById('get_book_all');
 const getBookEditForm = document.getElementById('get_book_edit_form');
+const getAuthorEditForm = document.getElementById('get_author_edit_form');
 
 // Set Requests
 const addBook = document.getElementById('add_book');
@@ -13,6 +14,7 @@ const editBook = document.getElementById('edit_book');
 const deleteBook = document.getElementById('delete_book');
 const logout = document.getElementById('admin_logout');
 const editBookForm = document.getElementById('edit_book_form');
+const editBookFormByAuthor = document.getElementById('edit_book_form_by_author');
 
 // Modals Buttons
 const closeAddBook = document.getElementById('add_book_close');
@@ -280,7 +282,7 @@ searchBookByName.addEventListener('submit', (e)=>{
 searchBookByAuthor.addEventListener('submit', (e)=>{
     e.preventDefault();
     const bookAuthor = searchBookByAuthor.children[0].value;
-    searchBookByName.reset();
+    searchBookByAuthor.reset();
     if( bookAuthor )
         SearchBookAuthor(bookAuthor);
     else{
@@ -418,6 +420,19 @@ getBookEditForm.addEventListener('submit', (e)=>{
     SearchBookToEdit(getBookEditForm.children[0].value);
 });
 
+/*
+getAuthorEditForm.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    if( getAuthorEditForm.children[0].value.length === 0 )
+        return;
+        console.log(getAuthorEditForm.children[0].value);
+    SearchBookToEditByAuthor(getAuthorEditForm.children[0].value);
+});
+*/
+
+
+
+
 /**
  * Edits the book if exist according to the user input.
  * @param {Book name} book 
@@ -451,6 +466,37 @@ async function SearchBookToEdit(book)
     name.value = data.name; author.value = data.author; year.value = data.year; genre.value = data.genre;
     description.value = data.description;
 }
+/*
+async function SearchBookToEditByAuthor(Author)
+{
+    const res = await fetch('/books/author/'+Author,{
+        method: 'GET'
+    });
+    const data = await res.json();
+    if( data.Message ){
+        const editModal = document.getElementById('edit_book_modal');
+        if( editModal.children[2].className === 'hidden'){
+            editModal.children[2].innerHTML = data.Message;
+            editModal.children[2].className = 'error';
+        }
+        setTimeout(() => {
+            editModal.children[2].className = 'hidden';
+            editModal.children[2].innerHTML = '';
+        }, 2000);
+        return;
+    }  
+    const name = editBookFormByAuthor.children[0].children[0];
+    const author = editBookFormByAuthor.children[0].children[1];
+    const year = editBookFormByAuthor.children[0].children[2];
+    const genre = editBookFormByAuthor.children[0].children[3];
+    const description = editBookFormByAuthor.children[1];
+    for( let i = 0; i < editBookFormByAuthor.children[0].children.length; i++)
+        editBookFormByAuthor.children[0].children[i].disabled = false;
+    editBookFormByAuthor.children[1].disabled = false; editBookFormByAuthor.children[2].disabled = false;
+    name.value = data.name; author.value = data.author; year.value = data.year; genre.value = data.genre;
+    description.value = data.description;
+}
+*/
 
 /**
  * Breaks the book data into an object and sends an edit request to the server.
@@ -462,8 +508,20 @@ editBookForm.addEventListener('submit',(e)=>{
     const year = editBookForm.children[0].children[2].value;
     const genre = editBookForm.children[0].children[3].value;
     const description = editBookForm.children[1].value;
-    EditBook(getBookEditForm.children[0].value, {name,author,year,genre,description} );
+    EditBook(name, {name,author,year,genre,description} );
 });
+
+/*
+editBookFormByAuthor.addEventListener('submit',(e)=>{
+    e.preventDefault();
+    const name = editBookFormByAuthor.children[0].children[0].value;
+    const author = editBookFormByAuthor.children[0].children[1].value;
+    const year = editBookFormByAuthor.children[0].children[2].value;
+    const genre = editBookFormByAuthor.children[0].children[3].value;
+    const description = editBookFormByAuthor.children[1].value;
+    EditBook(editBookFormByAuthor.children[0].value, {name,author,year,genre,description} );
+});
+*/
 
 /**
  * Sends an edit request to the server.
@@ -500,6 +558,7 @@ async function EditBook(bookName, bookInfo)
     }, 3000);
     getBookEditForm.reset();
     editBookForm.reset();
+   // editBookFormByAuthor.reset();
 }
 
 

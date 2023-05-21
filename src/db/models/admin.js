@@ -12,12 +12,6 @@ const adminSchema = new mongoose.Schema({
         required: true,
         minlength: 6
     },
-    tokens: [{
-        token: {
-            type: String,
-            required: true
-        }
-    }],
 });
 
 /**
@@ -25,32 +19,24 @@ const adminSchema = new mongoose.Schema({
  */
 adminSchema.pre('save', async function (next) {
     if (this.isModified('password')) {
-        const adminPassword = await bcrypt.hash(this.password, 8);
-        this.password = adminPassword;
+        this.password = await bcrypt.hash(this.password, 8);
     }
     next();
 });
 
 /**
  * Generates a log in token [ 15 minutes ] for admin.
- * @returns String token.
  */
+
 adminSchema.methods.generateToken = async function () {
-    const token = jwt.sign({ ID: this.ID }, process.env.JWT_KEY, { expiresIn: "1d" });
-    this.tokens = this.tokens.concat({ token });  /*potrei commentare le 2 righe 40-41*/ 
-    await this.save();
-    return token;
+    return jwt.sign({ ID: this.ID }, process.env.JWT_KEY, { expiresIn: "1d" });
 };
 
 /**
  * Verifies the given token.
- * @param {Admin token} token 
- * @returns Admin ID
  */
 adminSchema.statics.verifyToken = async ( token ) => {
-    const decoded = jwt.verify(token, process.env.JWT_KEY);
-    return decoded
+    return jwt.verify(token, process.env.JWT_KEY);
 }
 
-const Admin = mongoose.model('Admins', adminSchema);
-module.exports = Admin;
+module.exports = mongoose.model('Admins', adminSchema);

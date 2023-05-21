@@ -428,7 +428,9 @@ async function BookInformation(bookName)
 /**
  * Filter search. Sends for every letter a search request 
  */
-searchBook.addEventListener('keyup',()=>{
+searchBook.addEventListener('keyup',(e)=>{
+    if (e.isComposing)
+        return;
     if(searchBook.value.length > 0)
         SearchBook(searchBook.value);
     else
@@ -453,7 +455,9 @@ async function SearchBook(book)
 /**
  * Filter search. Sends for every letter a search request 
  */
-searchAuthor.addEventListener('keyup',()=>{
+searchAuthor.addEventListener('keyup',(e)=>{
+    if (e.isComposing)
+        return;
     if(searchAuthor.value.length > 0)
         SearchAuthor(searchAuthor.value);
     else
