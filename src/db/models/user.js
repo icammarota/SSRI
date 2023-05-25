@@ -52,7 +52,6 @@ userSchema.pre('save', async function (next) {
 
 /**
  * Generates a logging token for a user.
- * @returns String token.
  */
 userSchema.methods.generateToken = async function () {
     const token = jwt.sign({ ID: this.ID }, process.env.JWT_KEY, { expiresIn: "1d" });
@@ -63,8 +62,6 @@ userSchema.methods.generateToken = async function () {
 
 /**
  * Finds the user who holds the given token.
- * @param {User token} token 
- * @returns User object or undefined
  */
 userSchema.statics.findUser = async ( token ) => {
     const users = await User.find({});
@@ -78,8 +75,6 @@ userSchema.statics.findUser = async ( token ) => {
 
 /**
  * Verifies the given token.
- * @param {User token} token 
- * @returns User ID.
  */
 userSchema.statics.verifyToken = async ( token ) => {
     const decoded = jwt.verify(token, process.env.JWT_KEY);

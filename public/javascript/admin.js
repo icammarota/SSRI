@@ -153,7 +153,6 @@ addBookRequest.addEventListener('submit', (e)=>{
 
 /**
  * Sends a search request to the server.
- * @param {Book name} book 
  */
 async function SearchBook(book)
 {
@@ -172,7 +171,6 @@ async function SearchBook(book)
 
 /**
  * Sends a search request to the server.
- * @param {Author name} author 
  */
 async function SearchAuthor(author)
 {
@@ -231,7 +229,6 @@ deleteBookRequest.addEventListener('submit',(e)=>{
 
 /**
  * Sends a delete request to the server.
- * @param {Name of the book} bookName 
  */
 async function DeleteBook(bookName)
 {
@@ -319,7 +316,6 @@ async function GetAllBooks()
 
 /**
  * Sends a search request to the server and returns the book.
- * @param {Book Name} searchValue 
  */
 async function SearchBookName(searchValue)
 {
@@ -345,7 +341,6 @@ async function SearchBookName(searchValue)
 
 /**
  * Sends a search request to the server and returns the book.
- * @param {Book Author} searchValue 
  */
 async function SearchBookAuthor(searchValue)
 {
@@ -373,7 +368,6 @@ async function SearchBookAuthor(searchValue)
 
 /**
  * Inserts a book from the data base to the result container with information included.
- * @param {Book Json Object} book
  */
 function BookResults(book)
 {
@@ -435,7 +429,6 @@ getAuthorEditForm.addEventListener('submit', (e)=>{
 
 /**
  * Edits the book if exist according to the user input.
- * @param {Book name} book 
  */
 async function SearchBookToEdit(book)
 {
@@ -525,8 +518,6 @@ editBookFormByAuthor.addEventListener('submit',(e)=>{
 
 /**
  * Sends an edit request to the server.
- * @param {Book to edit} bookName 
- * @param {Book information to change} bookInfo 
  */
 async function EditBook(bookName, bookInfo)
 {

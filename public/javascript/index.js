@@ -1,14 +1,13 @@
 LoadPage();
 LoadBooks();
-async function LoadPage(){
-    if( localStorage.length > 0 ){
-        const res = await fetch('/user/load',{
+async function LoadPage() {
+    if (localStorage.length > 0) {
+        const res = await fetch('/user/load', {
             method: 'GET',
             headers: { token: localStorage.getItem('token') }
         });
         const data = await res.json();
-        if( data.name )
-        {
+        if (data.name) {
             userInterface.className = 'hidden';
             userSettings.className = ''; userSettings.innerHTML = (data.name).concat(',');
             LoadCart(); GetUser();
@@ -59,7 +58,7 @@ const prevPage = document.getElementById('prev_page');
 /**
  * Opens 'Login/Register' modal and blocks any other background activity.
  */
-userInterface.addEventListener('click', ()=>{
+userInterface.addEventListener('click', () => {
     document.getElementById('login_register').className = 'visible_modal';
     document.getElementById('block_background').className = 'visible_background';
 });
@@ -67,7 +66,7 @@ userInterface.addEventListener('click', ()=>{
 /**
  * Closes the 'Login/Register' modal and returns the background activity.
  */
-closeUserInterface.addEventListener('click',()=>{
+closeUserInterface.addEventListener('click', () => {
     document.getElementById('login_register').className = 'hidden';
     document.getElementById('block_background').className = 'hidden';
 })
@@ -75,7 +74,7 @@ closeUserInterface.addEventListener('click',()=>{
 /**
  * Opens the 'About' modal and blocks any other background activity.
  */
-about.addEventListener('click',()=>{
+about.addEventListener('click', () => {
     document.getElementById('about_modal').className = 'visible_modal';
     document.getElementById('block_background').className = 'visible_background';
 });
@@ -83,7 +82,7 @@ about.addEventListener('click',()=>{
 /**
  * Closes the 'About' modal and returns the background activity.
  */
-closeAbout.addEventListener('click', ()=>{
+closeAbout.addEventListener('click', () => {
     document.getElementById('about_modal').className = 'hidden';
     document.getElementById('block_background').className = 'hidden';
 });
@@ -91,7 +90,7 @@ closeAbout.addEventListener('click', ()=>{
 /**
  * Opens the 'Register' modal.
  */
-register.addEventListener('click',(e)=>{
+register.addEventListener('click', (e) => {
     e.preventDefault();
     document.getElementById('register_modal').className = 'visible_modal';
     document.getElementById('login_register').className = 'hidden';
@@ -100,7 +99,7 @@ register.addEventListener('click',(e)=>{
 /**
  * Closes the 'Register' modal and returns to 'Login' modal.
  */
-closeRegister.addEventListener('click',()=>{
+closeRegister.addEventListener('click', () => {
     document.getElementById('login_register').className = 'visible_modal';
     document.getElementById('register_modal').className = 'hidden';
 });
@@ -108,7 +107,7 @@ closeRegister.addEventListener('click',()=>{
 /**
  * Opens the 'Privacy' modal.
  */
-privacy.addEventListener('click',()=>{
+privacy.addEventListener('click', () => {
     document.getElementById('privacy_modal').classList.remove('hidden');
     document.getElementById('block_background').className = 'visible_background';
 });
@@ -116,7 +115,7 @@ privacy.addEventListener('click',()=>{
 /**
  * Closes the 'Privacy' modal.
  */
-closePrivacy.addEventListener('click',()=>{
+closePrivacy.addEventListener('click', () => {
     document.getElementById('privacy_modal').className = 'hidden';
     document.getElementById('block_background').className = 'hidden';
 });
@@ -124,7 +123,7 @@ closePrivacy.addEventListener('click',()=>{
 /**
  * Opens the 'Terms & Conditions' modal.
  */
-termsNconditions.addEventListener('click',()=>{
+termsNconditions.addEventListener('click', () => {
     document.getElementById('terms_conditions_modal').classList.remove('hidden');
     document.getElementById('block_background').className = 'visible_background';
 });
@@ -132,7 +131,7 @@ termsNconditions.addEventListener('click',()=>{
 /**
  * Closes the 'Terms & Conditions' modal.
  */
-closeTermsNcondtions.addEventListener('click',()=>{
+closeTermsNcondtions.addEventListener('click', () => {
     document.getElementById('terms_conditions_modal').className = 'hidden';
     document.getElementById('block_background').className = 'hidden';
 });
@@ -140,7 +139,7 @@ closeTermsNcondtions.addEventListener('click',()=>{
 /**
  * Opens the 'Contact-Us' modal.
  */
-contactUs.addEventListener('click',()=>{
+contactUs.addEventListener('click', () => {
     document.getElementById('contact_us_modal').classList.remove('hidden');
     document.getElementById('block_background').className = 'visible_background';
 });
@@ -148,7 +147,7 @@ contactUs.addEventListener('click',()=>{
 /**
  * Closes the 'Contact-Us' modal. Doesn't sent anything.
  */
-sendContactUs.addEventListener('submit',(e)=>{
+sendContactUs.addEventListener('submit', (e) => {
     e.preventDefault();
     document.getElementById('contact_us_modal').className = 'hidden';
     document.getElementById('block_background').className = 'hidden';
@@ -158,7 +157,7 @@ sendContactUs.addEventListener('submit',(e)=>{
 /**
  * Closes the 'Contact-Us' modal.
  */
-closeContactUs.addEventListener('click',()=>{
+closeContactUs.addEventListener('click', () => {
     document.getElementById('contact_us_modal').className = 'hidden';
     document.getElementById('block_background').className = 'hidden';
 });
@@ -166,9 +165,9 @@ closeContactUs.addEventListener('click',()=>{
 /**
  * Opens / Closes the user settings.
  */
-userSettings.addEventListener('click', ()=>{
+userSettings.addEventListener('click', () => {
     let settingsModal = document.getElementById('user_settings_modal');
-    if( settingsModal.style.display === 'flex')
+    if (settingsModal.style.display === 'flex')
         settingsModal.style.display = 'none';
     else
         settingsModal.style.display = 'flex';
@@ -177,7 +176,7 @@ userSettings.addEventListener('click', ()=>{
 /**
  * Opens the 'Edit User' modal.
  */
-editUser.addEventListener('click',()=>{
+editUser.addEventListener('click', () => {
     document.getElementById('edit_user_modal').className = '';
     GetUser();
 });
@@ -185,14 +184,14 @@ editUser.addEventListener('click',()=>{
 /**
  * Closes the 'Edit User' modal.
  */
-closeEditUser.addEventListener('click',()=>{
+closeEditUser.addEventListener('click', () => {
     document.getElementById('edit_user_modal').className = 'hidden';
 });
 
 /**
  * Opens the user Cart modal.
  */
-cart.addEventListener('click',()=>{
+cart.addEventListener('click', () => {
     document.getElementById('cart_modal').classList.remove('hidden');
     LoadCart();
 });
@@ -200,7 +199,7 @@ cart.addEventListener('click',()=>{
 /**
  * Closes the user Cart modal.
  */
-closeCart.addEventListener('click', ()=>{
+closeCart.addEventListener('click', () => {
     document.getElementById('cart_modal').className = 'hidden';
 });
 
@@ -210,9 +209,8 @@ closeCart.addEventListener('click', ()=>{
 /**
  * Sends an user information request to the server.
  */
-async function GetUser()
-{
-    const res = await fetch('/user/me',{
+async function GetUser() {
+    const res = await fetch('/user/me', {
         method: 'GET',
         headers: { token: localStorage.getItem('token') }
     });
@@ -224,22 +222,21 @@ async function GetUser()
 /**
  * Sends an edit request to the server.
  */
-editUserReq.addEventListener('submit', (e)=>{
+editUserReq.addEventListener('submit', (e) => {
     e.preventDefault();
-    if(editUserReq.children[2].value != editUserReq.children[3].value )
-    {
+    if (editUserReq.children[2].value != editUserReq.children[3].value) {
         document.getElementById('error_password').innerHTML = 'Passwords are different.'
         return;
     }
-    const editInfo = { name: editUserReq.children[0].value, email: editUserReq.children[1].value,password:editUserReq.children[2].value};
+    const editInfo = { name: editUserReq.children[0].value, email: editUserReq.children[1].value, password: editUserReq.children[2].value };
     editUserInfo(editInfo);
 });
 
 /**
  * Opens a 'Book Modal' and sends a request to the server for the book information.
  */
-booksContainer.addEventListener('click',(e)=>{
-    if( e.target.id != booksContainer.id && e.target.id != ''){
+booksContainer.addEventListener('click', (e) => {
+    if (e.target.id != booksContainer.id && e.target.id != '') {
         const bookInfo = document.getElementById('book_information');
         bookInfo.className = 'book_modal';
         document.getElementById('block_background').className = 'visible_background';
@@ -250,7 +247,7 @@ booksContainer.addEventListener('click',(e)=>{
 /**
  * Closes the 'Book Modal.
  */
-closeBookInfo.addEventListener('click', ()=>{
+closeBookInfo.addEventListener('click', () => {
     const bookInfo = document.getElementById('book_information');
     bookInfo.className = 'hidden';
     bookInfo.removeChild(document.getElementById('book_information_title'));
@@ -264,9 +261,9 @@ closeBookInfo.addEventListener('click', ()=>{
 /**
  * Sends register credentials to the server. If register succeed login the account.
  */
-createAccount.addEventListener('submit',(e)=>{
+createAccount.addEventListener('submit', (e) => {
     e.preventDefault();
-    const registerInfo = { name: createAccount.children[0].value, email:createAccount.children[1].value, password: createAccount.children[2].value};
+    const registerInfo = { name: createAccount.children[0].value, email: createAccount.children[1].value, password: createAccount.children[2].value };
     createAccount.reset();
     RegisterAccount(registerInfo);
 });
@@ -274,26 +271,25 @@ createAccount.addEventListener('submit',(e)=>{
 /**
  * Sends login credentials to the server in order to verify account.
  */
-login.addEventListener('submit', (e) =>{
+login.addEventListener('submit', (e) => {
     e.preventDefault();
-    const loginInfo = { email: login.children[0].value , password: login.children[1].value };
+    const loginInfo = { email: login.children[0].value, password: login.children[1].value };
     Login(loginInfo);
 });
 
 /**
  * Sends a login request to the server and returns a user token.
- * @param {User credentials} loginInfo 
+
  */
-async function Login(loginInfo)
-{
+async function Login(loginInfo) {
     const res = await fetch('/user/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(loginInfo),
     });
     const data = await res.json();
-    if( !data.Message ){
-        localStorage.setItem('token',data.token);
+    if (!data.Message) {
+        localStorage.setItem('token', data.token);
         userInterface.className = 'hidden';
         userSettings.className = ''; userSettings.innerHTML = (data.name).concat(',');
         closeUserInterface.click();
@@ -305,21 +301,19 @@ async function Login(loginInfo)
 
 /**
  * Sends a register request to the server and returns a user token.
- * @param {User register credentials} registerInfo 
  */
-async function RegisterAccount(registerInfo)
-{
+async function RegisterAccount(registerInfo) {
     const res = await fetch('/user/create', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(registerInfo)
     });
     const data = await res.json();
-    if( !data.Message ){
-        await Login( {email: registerInfo.email , password: registerInfo.password} );
+    if (!data.Message) {
+        await Login({ email: registerInfo.email, password: registerInfo.password });
         registerModal.className = 'hidden';
     }
-    else{
+    else {
         const errorMessage = document.getElementById('register_error_message');
         errorMessage.className = 'error';
         errorMessage.innerHTML = data.Message;
@@ -328,41 +322,38 @@ async function RegisterAccount(registerInfo)
 
 /**
  * Edit requests to the server.
- * @param {User credentials} userInfo 
  */
-async function editUserInfo(userInfo)
-{
-    const res = await fetch('/user/me/edit',{
+async function editUserInfo(userInfo) {
+    const res = await fetch('/user/me/edit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify( { user: userInfo, token: localStorage.getItem('token') })
+        body: JSON.stringify({ user: userInfo, token: localStorage.getItem('token') })
     });
     const data = await res.json();
-    if( data.Message && userInfo.name){
+    if (data.Message && userInfo.name) {
         userSettings.innerHTML = userInfo.name.concat(',');
         closeEditUser.click();
         editUserReq.reset();
         GetUser();
     }
-    if( data.Error )
-        document.getElementById('error_password').innerHTML = data.Error;   
+    if (data.Error)
+        document.getElementById('error_password').innerHTML = data.Error;
 }
 
 /**
  * Logouts user and clears local storage.
  */
-logout.addEventListener('click', ()=>{
+logout.addEventListener('click', () => {
     document.getElementById('user_settings_modal').style.display = 'none';
-    userInterface.classList.remove('hidden');   userSettings.className = 'hidden';
+    userInterface.classList.remove('hidden'); userSettings.className = 'hidden';
     Logout();
 });
 
 /**
  * Sends a logout request to the server.
  */
-async function Logout()
-{
-    await fetch('/user/logout',{
+async function Logout() {
+    await fetch('/user/logout', {
         method: 'GET',
         headers: { token: localStorage.getItem('token') }
     });
@@ -372,11 +363,10 @@ async function Logout()
 /**
  * Sends a request to the server for all the books in the DB and loads them to the book container.
  */
-async function LoadBooks()
-{
-    const res = await fetch('/books',{
+async function LoadBooks() {
+    const res = await fetch('/books', {
         method: 'GET',
-        headers: { user: 'user'}
+        headers: { user: 'user' }
     });
     const data = await res.json();
     BookResult(data);
@@ -384,16 +374,15 @@ async function LoadBooks()
 
 /**
  * Inserts the books data from Server to the book container.
- * @param {List of book object} books 
  */
-function BookResult(books)
-{
-    if( books.length === 0 ){
+function BookResult(books) {
+    if (books.length === 0) {
         booksContainer.innerHTML = 'No Book Results.';
     }
-    for(let i = 0; i < books.length; i++){
+    for (let i = 0; i < books.length; i++) {
         let div = document.createElement('div');
-        let img = document.createElement('img'); img.id = 'book' + i;
+        let img = document.createElement('img');
+        img.id = 'book' + i;
         let p = document.createElement('p');
 
         img.src = books[i].image;
@@ -406,11 +395,9 @@ function BookResult(books)
 
 /**
  * Sends a book request to the server by clicked image and inserts information to the 'Book Modal'.
- * @param {Book name} bookName 
  */
-async function BookInformation(bookName)
-{
-    const res = await fetch('/books/name/' + bookName,{
+async function BookInformation(bookName) {
+    const res = await fetch('/books/name/' + bookName, {
         method: 'GET'
     });
     const data = await res.json();
@@ -418,32 +405,65 @@ async function BookInformation(bookName)
     title.innerHTML = data.name + ', ' + data.author + ' , ' + data.year + ', ' + data.genre;
     let description = document.createElement('p');
     description.innerHTML = data.description;
-    title.id = 'book_information_title';  description.id = 'book_information_description';
-    
+    title.id = 'book_information_title'; description.id = 'book_information_description';
+
     const bookInfo = document.getElementById('book_information');
-    bookInfo.insertBefore(title,document.getElementById('add_book_cart'));
-    bookInfo.insertBefore(description,document.getElementById('add_book_cart'));
+    bookInfo.insertBefore(title, document.getElementById('add_book_cart'));
+    bookInfo.insertBefore(description, document.getElementById('add_book_cart'));
 }
 
 /**
  * Filter search. Sends for every letter a search request 
  */
+/*
 searchBook.addEventListener('keyup',(e)=>{
-    if (e.isComposing)
+    if (e.isComposing ) {
         return;
+      }
     if(searchBook.value.length > 0)
         SearchBook(searchBook.value);
     else
         SearchBook('*');
 });
+*/
+
+let timeoutIdSearch;
+
+
+const debounceSearch = (func, delay) => {
+    //pulisce il timeout
+    clearTimeout(timeoutIdSearch);
+    //esegue funzione dopo x millesecondi
+    timeoutIdSearch = setTimeout(func, delay);
+}
+
+
+searchBook.addEventListener('keyup', (e) => {
+    //finché stai scrivendo, skippa
+    if (e.isComposing) {
+        console.log('skippa ricerca');
+        return;
+    }
+
+    const searchValue = searchBook.value.length;
+
+    debounceSearch(
+        () => {
+            if (searchValue > 0)
+                SearchBook(searchBook.value);
+            else
+                SearchBook('*');
+        },
+        1500 // 1000 millisec -> 1 sec
+    )
+});
+
 
 /**
  * Sends a search request to the server.
- * @param {Book name} book 
  */
-async function SearchBook(book)
-{
-    const res = await fetch('/books/search/'+ book ,{
+async function SearchBook(book) {
+    const res = await fetch('/books/search/' + book, {
         method: 'GET'
     });
     const data = await res.json();
@@ -455,10 +475,11 @@ async function SearchBook(book)
 /**
  * Filter search. Sends for every letter a search request 
  */
-searchAuthor.addEventListener('keyup',(e)=>{
-    if (e.isComposing)
+searchAuthor.addEventListener('keyup', (e) => {
+    if (e.isComposing) {
         return;
-    if(searchAuthor.value.length > 0)
+    }
+    if (searchAuthor.value.length > 0)
         SearchAuthor(searchAuthor.value);
     else
         SearchAuthor('*');
@@ -466,11 +487,9 @@ searchAuthor.addEventListener('keyup',(e)=>{
 
 /**
  * Sends a search request to the server.
- * @param {Author name} author 
  */
-async function SearchAuthor(author)
-{
-    const res = await fetch('/books/search-author/'+ author ,{
+async function SearchAuthor(author) {
+    const res = await fetch('/books/search-author/' + author, {
         method: 'GET'
     });
     const data = await res.json();
@@ -481,32 +500,33 @@ async function SearchAuthor(author)
 /**
  * Sends a 'Load Cart' to the server.
  */
-async function LoadCart()
-{
+async function LoadCart() {
     const res = await fetch('/user/cart', {
         method: 'GET',
         headers: { token: localStorage.getItem('token') }
     });
     const data = await res.json();
-    if( data.Message ){
+    if (data.Message) {
         const cartContainer = document.getElementById('cart_book_container');
         cartContainer.innerHTML = 'User not logged in.';
         cartContainer.className = 'cart_book_container_empty';
         cartContainer.style.color = 'red';
         return;
     }
-    if( data.length === 0 ){
+    if (data.length === 0) {
         const cartContainer = document.getElementById('cart_book_container');
         cartContainer.innerHTML = 'Cart is Empty.';
         cartContainer.className = 'cart_book_container_empty';
     }
-    else{
+    else {
         const cartContainer = document.getElementById('cart_book_container');
         cartContainer.innerHTML = '';
-        for(let i = 0; i < data.length; i++){
+        for (let i = 0; i < data.length; i++) {
             let div = document.createElement('div');
             let img = document.createElement('img');
-            let p = document.createElement('p'); p.id = 'cart_book_title'
+            let p = document.createElement('p'); 
+            p.id = 'cart_book_title'
+            img.style.maxHeight='200px'
             img.src = data[i].book.image;
             p.innerHTML = data[i].book.name;
             div.appendChild(img); div.appendChild(p);
@@ -518,11 +538,11 @@ async function LoadCart()
 /**
  * Adds a book to the user cart.
  */
-addBookCart.addEventListener('click', ()=>{
+addBookCart.addEventListener('click', () => {
     let bookName = addBookCart.parentNode.children[1].innerHTML;
     let book = '';
-    for(let i = 0; i < bookName.length; i++){
-        if( bookName[i] == ',') break;
+    for (let i = 0; i < bookName.length; i++) {
+        if (bookName[i] == ',') break;
         book += bookName[i];
     }
     AddBookCart(book);
@@ -530,48 +550,45 @@ addBookCart.addEventListener('click', ()=>{
 
 /**
  * Sends a request to the server: 'Adding book to Cart'. And visually adding the book to the cart container.
- * @param {Name of the book} book 
- * @returns 
  */
-async function AddBookCart(book)
-{
-    const res = await fetch('/user/cart/add/'+book, {
+async function AddBookCart(book) {
+    const res = await fetch('/user/cart/add/' + book, {
         method: 'POST',
         headers: { token: localStorage.getItem('token') }
     });
     const data = await res.json();
-    if( data.Message ){
+    if (data.Message) {
         const bookInfo = document.getElementById('book_information');
         const p = document.createElement('p');
-        if( data.Message === 'No Authentication.')
+        if (data.Message === 'No Authentication.')
             p.innerHTML = 'User not logged in. Please log in or register.';
         else
             p.innerHTML = 'Book has been already added to the cart.';
-        for(let i = 0; i < bookInfo.children.length ; i++){
-            if(bookInfo.children[i].id === 'added_book_note' )
+        for (let i = 0; i < bookInfo.children.length; i++) {
+            if (bookInfo.children[i].id === 'added_book_note')
                 return;
-        }   
-        bookInfo.insertBefore(p ,document.getElementById('book_information_close'));
+        }
+        bookInfo.insertBefore(p, document.getElementById('book_information_close'));
         p.id = 'added_book_note';
-        setTimeout( ()=>{
+        setTimeout(() => {
             bookInfo.removeChild(p);
-        },2500)
+        }, 2500)
     }
-    else{
+    else {
         const cart = document.getElementById('cart');
         const bookInfo = document.getElementById('book_information');
         const p = document.createElement('p'); p.innerHTML = 'Book has been added to the Cart.';
 
-        bookInfo.insertBefore(p ,document.getElementById('book_information_close'));
+        bookInfo.insertBefore(p, document.getElementById('book_information_close'));
         p.id = 'added_book_note';
-        setTimeout( ()=>{
+        setTimeout(() => {
             bookInfo.removeChild(p);
-        },2500)
+        }, 2500)
 
         cart.classList.add('juggle_move');
-        setTimeout(()=>{
+        setTimeout(() => {
             cart.classList.remove('juggle_move');
-        },1000)
+        }, 1000)
         LoadCart();
     }
 }
@@ -579,23 +596,22 @@ async function AddBookCart(book)
 /**
  * Clears the cart and fictionally submit a 'Buy'.
  */
-buyBooks.addEventListener('click',()=>{
+buyBooks.addEventListener('click', () => {
     BuyBooks();
 });
 
 /**
  * Send a buying request to the server and clears the cart.
  */
-async function BuyBooks()
-{
-    const res =  await fetch('/user/cart/buy', {
+async function BuyBooks() {
+    const res = await fetch('/user/cart/buy', {
         method: 'POST',
         headers: { token: localStorage.getItem('token') }
     });
     const data = await res.json();
-    if( data.Message )
+    if (data.Message)
         alert(data.Message);
-    else{
+    else {
         document.getElementById('cart_modal').className = 'hidden';
         alert('Thanks for buying');
     }
@@ -604,50 +620,47 @@ async function BuyBooks()
 /**
  * Loads the next book page.
  */
-nextPage.addEventListener('click', ()=>{
+nextPage.addEventListener('click', () => {
     let pageNumber = document.getElementById('page_number').innerHTML;
-    Pagination(pageNumber,'NEXT');
+    Pagination(pageNumber, 'NEXT');
 });
 
 /**
  * Loads the previous page.
  */
-prevPage.addEventListener('click',()=>{
+prevPage.addEventListener('click', () => {
     let pageNumber = document.getElementById('page_number').innerHTML;
-    Pagination(pageNumber,'PRE');
+    Pagination(pageNumber, 'PRE');
 })
 
 /**
  * Sends a request to the server to load the next or previous page.
- * @param {Page number} pageNumber
- * @param {Previous/Next page} moveTo
  */
-async function Pagination(pageNumber,moveTo)
-{
-    if( searchBook.value.length > 0 ) // Stops pagination incase there is input in search box.
+async function Pagination(pageNumber, moveTo) {
+    if (searchBook.value.length > 0) // Stops pagination incase there is input in search box.
         return;
-    if( moveTo === 'NEXT')
+    if (moveTo === 'NEXT')
         pageNumber++;
     else
         pageNumber--;
-    const res = await fetch('/page/'+pageNumber ,{
+    const res = await fetch('/page/' + pageNumber, {
         method: 'GET'
     });
     const data = await res.json();
-    if( data.Message === 'Page out of boundaries.')
+    if (data.Message === 'Page out of boundaries.')
         return;
     booksContainer.innerHTML = '';
     const pageNum = document.getElementById('page_number');
-    if( moveTo === 'NEXT'){
+    if (moveTo === 'NEXT') {
         pageNum.innerHTML = pageNumber;
         prevPage.classList.remove('hidden');
-        if( data.length < 12 )
+        if (data.length < 12)
             nextPage.classList.add('hidden');
     }
-    if( moveTo === 'PRE'){
+    if (moveTo === 'PRE') {
         pageNum.innerHTML = pageNumber;
         nextPage.classList.remove('hidden');
-        if( pageNum.innerHTML == 1)
+        if (pageNum.innerHTML == 1)
             prevPage.classList.add('hidden');
     }
     BookResult(data);
