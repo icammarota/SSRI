@@ -117,16 +117,16 @@ router.get('/page/:id', async(req,res)=>{
     try{
         const page = req.params.id;
         if( page < 1 || page > 1000 || isNaN(page) )
-            return res.status(400).send( {Message: 'Page out of boundaries.'} );
+            return res.status(400).send( {Message: 'Pagina Inesistente.'} );
         const result = await Book.find();
         const books = [];
         if( !result )
-            return res.status(400).send( {Message: 'There are no Books in the store.'} );
+            return res.status(400).send( {Message: 'Non ci sono libri a Catalogo'} );
         let skip = (page-1) * limit;
         for( let i = 0; skip < result.length && i < limit; skip++,i++)
             books[i] = result[skip];
         if( books.length === 0 )
-            return res.status(400).send( {Message: 'Page out of boundaries.'} );
+            return res.status(400).send( {Message: 'Pagina Inesistente.'} );
         res.send(books);
     }
     catch(e){

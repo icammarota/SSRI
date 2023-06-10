@@ -653,7 +653,7 @@ async function Pagination(pageNumber, moveTo) {
         method: 'GET'
     });
     const data = await res.json();
-    if (data.Message === 'Page out of boundaries.')
+    if (data.Message === 'Pagina Inesistente.')
         return;
     booksContainer.innerHTML = '';
     const pageNum = document.getElementById('page_number');
