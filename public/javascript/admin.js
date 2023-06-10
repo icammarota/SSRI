@@ -377,7 +377,7 @@ function BookResults(book)
     img.src = book.image;
     const bookInfo = document.createElement("div");
     const title = document.createElement('p');
-    title.innerHTML = 'Name: ' + book.name + ' , Author: ' + book.author + ' , Year: ' + book.year + ' , Genre: ' + book.genre;
+    title.innerHTML = 'Nome: ' + book.name + ' , Autore: ' + book.author + ' , Anno: ' + book.year + ' , Genere: ' + book.genre;
     const description = document.createElement('p');
     description.innerHTML = book.description;
     

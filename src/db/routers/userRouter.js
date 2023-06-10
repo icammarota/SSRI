@@ -45,7 +45,7 @@ router.get('/user/me',userAuth, async(req,res)=>{
     try{
         const user = await User.findUser( token );
         if( !user )
-            return res.status(400).send( {Message: 'User could not be found. Please contact the management.' });
+            return res.status(400).send( {Message: 'Utente non trovato. Contatta gli amministratori.' });
         res.send( {name: user.name, email: user.email});
     }
     catch(e){
@@ -61,7 +61,7 @@ router.get('/user/me',userAuth, async(req,res)=>{
     try{
         const user = await User.findUser( token );
         if( !user )
-            return res.status(400).send( { Message: 'User not logged in. Cannot logout.'} )
+            return res.status(400).send( { Message: 'Utente non loggato. Impossibile disconnettersi.'} )
         for(let i = 0; i < user.tokens.length; i++){
             if( token === user.tokens[i].token ){
                 user.tokens[i].token += 'Im gonna ruin this token';
@@ -85,7 +85,7 @@ router.get('/user/cart', async(req,res)=>{
     try{
         const user = await User.findUser( token );
         if( !user )
-            return res.status(400).send( {Message: 'User not logged in.'} );
+            return res.status(400).send( {Message: 'Utente non connesso'} );
         await user.populate('cart.book');
         res.send( user.cart );
     }
@@ -106,9 +106,9 @@ router.post('/user/create', async (req,res) => {
     try{
         const user = new User(info);
         if( !user )
-            return res.status(404).send({Message: 'Generic error.'} );
+            return res.status(404).send({Message: 'Errore Generico.'} );
         if( user.password.length < 6 )
-            return res.status(404).send({Message: 'Invalid passswd requirements.'} );
+            return res.status(404).send({Message: 'La password deve essere almeno 6 caratteri.'} );
         await user.save();
         res.send({name: user.name});
     }
@@ -125,10 +125,10 @@ router.post('/user/login', async (req,res)=>{
     try{
         const user = await User.findOne( {email: loginInfo.email} );
         if( !user )
-            return res.status(404).send({Message: 'User not found.'});
+            return res.status(404).send({Message: 'Utente non trovato.'});
         const isMatch = await bcrypt.compare( loginInfo.password, user.password);
         if( !isMatch)
-            return res.status(404).send({Message: 'Invalid credentials.'});
+            return res.status(404).send({Message: 'Credenziali invalide.'});
         const token = await user.generateToken();
         res.send( {token, name: user.name} );
     }
@@ -171,9 +171,9 @@ router.post('/user/cart/buy',userAuth, async(req,res)=>{
     try{
         const user = await User.findUser( token );
         if( !user )
-            return res.status(400).send({Message: 'User not logged in.'});
+            return res.status(400).send({Message: 'Utente non connesso.'});
         if( user.cart.length === 0)
-            return res.status(400).send({Message: 'Cart is empty.'});
+            return res.status(400).send({Message: 'Il carrello è vuoto.'});
         user.cart = [];
         await user.save();
         res.send({});

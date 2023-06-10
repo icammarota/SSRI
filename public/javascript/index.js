@@ -217,6 +217,12 @@ async function GetUser() {
     const data = await res.json();
     editUserReq.children[0].placeholder = data.name;
     editUserReq.children[1].placeholder = data.email;
+    console.log(editUserReq);
+    console.log(editUserReq.children[0].placeholder);
+    console.log(editUserReq.children[0]);
+    console.log(editUserReq.children[1].placeholder);
+    console.log(editUserReq.children[1]);
+
 }
 
 /**
@@ -508,14 +514,14 @@ async function LoadCart() {
     const data = await res.json();
     if (data.Message) {
         const cartContainer = document.getElementById('cart_book_container');
-        cartContainer.innerHTML = 'User not logged in.';
+        cartContainer.innerHTML = 'Utente non connesso';
         cartContainer.className = 'cart_book_container_empty';
         cartContainer.style.color = 'red';
         return;
     }
     if (data.length === 0) {
         const cartContainer = document.getElementById('cart_book_container');
-        cartContainer.innerHTML = 'Cart is Empty.';
+        cartContainer.innerHTML = 'Il carrello è vuoto.';
         cartContainer.className = 'cart_book_container_empty';
     }
     else {
@@ -561,9 +567,9 @@ async function AddBookCart(book) {
         const bookInfo = document.getElementById('book_information');
         const p = document.createElement('p');
         if (data.Message === 'No Authentication.')
-            p.innerHTML = 'User not logged in. Please log in or register.';
+            p.innerHTML = 'Utente non connesso. Effettua la registrazione o il login.';
         else
-            p.innerHTML = 'Book has been already added to the cart.';
+            p.innerHTML = 'Libro già presente nel carrello';
         for (let i = 0; i < bookInfo.children.length; i++) {
             if (bookInfo.children[i].id === 'added_book_note')
                 return;
@@ -577,7 +583,7 @@ async function AddBookCart(book) {
     else {
         const cart = document.getElementById('cart');
         const bookInfo = document.getElementById('book_information');
-        const p = document.createElement('p'); p.innerHTML = 'Book has been added to the Cart.';
+        const p = document.createElement('p'); p.innerHTML = 'Libro aggiunto al carrello';
 
         bookInfo.insertBefore(p, document.getElementById('book_information_close'));
         p.id = 'added_book_note';
