@@ -39,7 +39,7 @@ router.get('/admin/page', async (req, res) => {
     try {
         const admin = await Admin.findOne({ ID: req.admin.ID });
         if (!admin)
-            return res.status(404).send({ Message: 'Invalid credentials.' });
+            return res.status(404).send({ Message: 'Credenziali non valide.' });
         res.send( { admin } );
     }
     catch (e) {
@@ -74,7 +74,7 @@ router.post('/admin/login', async (req, res) => {
             return res.status(404).send({ Message: 'Account not found.' });
         const isMatch = await bcrypt.compare(loginInfo.password, admin.password);
         if (!isMatch)
-            return res.status(404).send({ Message: 'Invalid credentials.' });
+            return res.status(404).send({ Message: 'Credenziali non valide.' });
         const token = await admin.generateToken();
         res.send({ token });
     }
@@ -83,12 +83,19 @@ router.post('/admin/login', async (req, res) => {
     }
 });
 
+/*
+router.post('/create-admin', async(req,res)=>{  
+    const admin = new Admin(req.body);          
+    admin.save();                               
+    res.send();                                 
+});                                             
+*/
+
 module.exports = router;
 
 
 
-
-// //////////////////////////////////////   Creates admin manually  /////////////////////////////////////////
+// //////////////////////////////////////   Creates admin manually with Postman //////////////////////////////
 //                                                          //////////////////////////////////////////////
 // router.post('/create-admin', async(req,res)=>{              //////////////////////////////////////////////
 //     const admin = new Admin(req.body);                      //////////////////////////////////////////////

@@ -422,7 +422,7 @@ button:hover{
         width: 95px;
     }
     #delete_book_form>button{
-        width: 80px;
+        width: 100px;
         height: 35px;
     }
     #get_book_name_form>button{

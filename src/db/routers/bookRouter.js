@@ -21,7 +21,7 @@ const limit = 12;
         else
             books = await Book.find(); // Admin FULL DB Search
         if( !books )
-            return res.status(400).send( {Message: 'There are no books in the data base.'} );
+            return res.status(400).send( {Message: 'Non sono presenti libri a catalogo'} );
         res.send( books );
     }
     catch(e){

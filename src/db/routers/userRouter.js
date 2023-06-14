@@ -29,7 +29,7 @@ router.get('/user/load', async(req,res)=>{
     try{
         const user = await User.findUser( token );
         if( !user )
-            return res.send( {Message: 'User is not logged in.'});
+            return res.send( {Message: 'Nessun utente collegato.'});
         res.send( {name: user.name} );
     }
     catch(e){

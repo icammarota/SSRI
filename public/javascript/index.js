@@ -217,11 +217,13 @@ async function GetUser() {
     const data = await res.json();
     editUserReq.children[0].placeholder = data.name;
     editUserReq.children[1].placeholder = data.email;
+   /* 
     console.log(editUserReq);
     console.log(editUserReq.children[0].placeholder);
     console.log(editUserReq.children[0]);
     console.log(editUserReq.children[1].placeholder);
     console.log(editUserReq.children[1]);
+    */
 
 }
 
@@ -437,15 +439,15 @@ let timeoutIdSearch;
 
 
 const debounceSearch = (func, delay) => {
-    //pulisce il timeout
+    //Clear Timeout
     clearTimeout(timeoutIdSearch);
-    //esegue funzione dopo x millesecondi
+    //run function after x milleseconds
     timeoutIdSearch = setTimeout(func, delay);
 }
 
 
 searchBook.addEventListener('keyup', (e) => {
-    //finché stai scrivendo, skippa
+    //to skip until you are writing
     if (e.isComposing) {
         console.log('skippa ricerca');
         return;
