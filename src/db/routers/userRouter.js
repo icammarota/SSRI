@@ -193,24 +193,24 @@ router.post('/user/me/edit',async(req,res)=>{
         const user = await User.findUser( req.body.token );
         const updateUser = req.body.user;
         if( !user )
-            return res.status(400).send( { Error: 'User was not found. Please contact the management.'} );
+            return res.status(400).send( { Error: 'Utente non trovato. Contatta gli amministratori.'} );
         if( updateUser.name ){
             if( updateUser.name.length < 2 )
-                return res.status(400).send({ Error: 'Name is too short.'} );
+                return res.status(400).send({ Error: 'Il nome è troppo breve.'} );
             user.name = updateUser.name;
         }
         if( updateUser.email )
             user.email = updateUser.email;
         if( updateUser.password ){
             if( updateUser.password.length < 6 )
-                return res.status(400).send({ Error: 'Password is too short.'} );
+                return res.status(400).send({ Error: 'La password è troppo breve.'} );
             user.password = updateUser.password;
         }
         await user.save();
-        res.send( {Message: 'Information has been updated.'} );
+        res.send( {Message: 'Informazioni aggiornate.'} );
     }
     catch(e){
-        res.status(500).send( {Error: 'Invalid Email.'});
+        res.status(500).send( {Error: 'Email non valida.'});
     }
 });
 

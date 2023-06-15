@@ -683,7 +683,7 @@ footer>div:nth-child(3){
 }
 
 .add_book_effect{
-    transition: 0.6s;
+    transition: 0.6s;    
     animation: dance linear 0.3s;
 }
 /*

@@ -204,7 +204,7 @@ async function AddBook(book)
         return;
     }
     SearchBook(book.name);
-    alert('Book has been added to the DB. Check results in order to view the book.');
+    alert('Libro aggiunto. Controlla i risultati.');
 }
 
 /**
@@ -348,7 +348,6 @@ async function SearchBookAuthor(searchValue)
         method: 'GET'
     });
     const data = await res.json();
-    console.log(data);
     if( data.Message ){
         const searchModal = document.getElementById('get_book_author_modal');
         const p = document.createElement('p');
@@ -448,6 +447,7 @@ async function SearchBookToEdit(book)
         }, 2000);
         return;
     }  
+    console.log(editBookForm);
     const name = editBookForm.children[0].children[0];
     const author = editBookForm.children[0].children[1];
     const year = editBookForm.children[0].children[2];

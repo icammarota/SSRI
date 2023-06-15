@@ -36,10 +36,10 @@ router.get('/books/name/:id',async (req,res)=>{
     const bookSearch = '.*'+req.params.id+'.*';
     try{
         if( req.params.id.length < 2)
-            return res.status(400).send( {Message: 'Book name is too short.'} );
+            return res.status(400).send( {Message: 'Nome libro troppo breve.'} );
         const book = await Book.findOne( { "name": { $regex: bookSearch, $options: 'i' } } );
         if( !book )
-            return res.status(400).send( {Message:'Book not found.'} );
+            return res.status(400).send( {Message:'Libro non trovato.'} );
         res.send( book );
     }
     catch(e){
@@ -54,11 +54,11 @@ router.get('/books/author/:id', async (req,res)=>{
     const bookSearch = '.*'+req.params.id+'.*';
     try{
         if( bookSearch.length < 2)
-            return res.status(400).send( {Message: 'Author name is too short.'} );
+            return res.status(400).send( {Message: 'Nome autore troppo breve.'} );
         /*const book = await Book.find( { author: bookSearch } );*/
         const book = await Book.find( { "author": { $regex: bookSearch, $options: 'i' } } );
         if( !book || book.length === 0 )
-            return res.status(400).send( {Message:'Author not found.'} );
+            return res.status(400).send( {Message:'Autore non trovato.'} );
         res.send(book);
     }
     catch(e){
@@ -145,7 +145,7 @@ router.get('/page/:id', async(req,res)=>{
         const book = new Book(req.body);
         const duplicateBook = await Book.findOne( {name: book.name} );
         if( duplicateBook )
-            return res.status(400).send({Message: 'Duplicate book name.'} );
+            return res.status(400).send({Message: 'Libro già presente.'} );
         await book.save();
         res.send( {book} );
     }
@@ -165,7 +165,7 @@ router.patch('/books/edit/:bookname',adminAuth,async (req,res)=>{
     try{
         const book = await Book.findOne( { name: bookName } );
         if( bookInfo.name.length < 2 || bookInfo.author.length < 2 || bookInfo.year.length < 2 || bookInfo.genre.length < 2 || bookInfo.description.length < 2 )
-            return res.status(400).send( {Message: 'Invalid edit. Missing fields or too short.'} );
+            return res.status(400).send( {Message: 'Modifica errata. Campi mancanti o troppo brevi.'} );
         if( bookInfo.name != book.name )
             book.name = bookInfo.name;
         if( bookInfo.author != book.author )
@@ -195,7 +195,7 @@ router.patch('/books/edit/:bookname',adminAuth,async (req,res)=>{
     try{
         const deletedBook = await Book.findOneAndDelete( {name: bookName} );
         if( !deletedBook )
-            return res.status(400).send( {Message: 'Book not found.'});
+            return res.status(400).send( {Message: 'Libro non trovato.'});
         res.send( {deletedBook});
     }
     catch(e){

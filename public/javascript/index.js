@@ -233,7 +233,7 @@ async function GetUser() {
 editUserReq.addEventListener('submit', (e) => {
     e.preventDefault();
     if (editUserReq.children[2].value != editUserReq.children[3].value) {
-        document.getElementById('error_password').innerHTML = 'Passwords are different.'
+        document.getElementById('error_password').innerHTML = 'Le password sono differenti.'
         return;
     }
     const editInfo = { name: editUserReq.children[0].value, email: editUserReq.children[1].value, password: editUserReq.children[2].value };
@@ -385,7 +385,7 @@ async function LoadBooks() {
  */
 function BookResult(books) {
     if (books.length === 0) {
-        booksContainer.innerHTML = 'No Book Results.';
+        booksContainer.innerHTML = 'Nessun libro presente.';
     }
     for (let i = 0; i < books.length; i++) {
         let div = document.createElement('div');
